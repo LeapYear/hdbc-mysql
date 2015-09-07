@@ -119,6 +119,7 @@ connectMySQL info = do
                       do rv <- mysql_real_connect mysql_ host_ user_ passwd_ db_
                                                   (fromIntegral $ mysqlPort info)
                                                   unixSocket_
+                                                  (fromIntegral 0)
                          when (rv == nullPtr) (connectionError mysql_)
                          wrap mysql_
     where
@@ -830,6 +831,7 @@ foreign import ccall unsafe mysql_real_connect
  -> CString   -- database
  -> CInt      -- port
  -> CString   -- unix socket
+ -> CLong     -- client flag, do not use
  -> IO (Ptr MYSQL)
 
 foreign import ccall unsafe "&mysql_close" mysql_close
