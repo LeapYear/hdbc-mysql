@@ -2,3 +2,4 @@
 *.o
 *.dyn_o
 dist/
+.cabal-sandbox/
